@@ -1,3 +1,8 @@
+.restaurant-card-link{
+  text-decoration: none;
+  color:#222;
+}
+
 .restaurant-card {
   width: 360px;  
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -17,17 +22,19 @@
   height: 100px;
   object-fit: cover;
   display: block;
+  border-radius: 10px;
 }
 
 /* Info section */
-.restaurant-info {
+.restaurant-info-details{
   padding: 14px;
   display: flex;
   flex-direction: column;
   align-items: start;
+  
 }
 
-.restaurant-name {
+.restaurant-name{
   font-size: 18px;
   font-weight: 600;
   margin: 0;

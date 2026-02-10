@@ -82,6 +82,22 @@ hr{
 ul{
   padding: 0;
 }
+
+.restaurant-render-button{
+  display: flex;  
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: -20px;
+}
+
+.restaurant-render-button button{
+  font-size: 20px;
+  background-color: transparent ;
+  border: none;
+  cursor: pointer;
+}
+
 @media (max-width: 480px) {
   .offers-image {
     width: 100%;
