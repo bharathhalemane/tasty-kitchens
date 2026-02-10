@@ -27,16 +27,7 @@ const Home = () => {
     const [offersList, setOffersList] = useState([])
     const [popularRestaurant, setPopularRestaurant] = useState([])
     const [sortByFilter, setSortByFilter] = useState(sortByOptions[0].id)
-    const [activePage, setActivePage] = useState(1)    
-    const cartData = [{ cost: 660, id: "2200044fe023a35-42b1-4de1-b2d0-12d5eb1db85d", imageUrl: "https://assets.ccbp.in/frontend/react-js/,tasty-kitchens/food-items-3/chicken-roast-31.jpg", name: "Chicken Roast", quantity: 2 }
-        ,
-        {
-            cost: 975,id: "2200044c6de27e3-5f6c-4e41-92f4-fe952132eca0",imageUrl: "https://assets.ccbp.in/frontend/react-js/tasty-kitchens/food-items-3/chicken-kebab-32.jpg",name: "Chicken Kebab",quantity: 3
-        }
-    ]
-    localStorage.setItem("cartData",JSON.stringify(cartData))
-    
-
+    const [activePage, setActivePage] = useState(1)   
 
     const jwtToken = Cookies.get("jwtToken")
 

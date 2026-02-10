@@ -9,7 +9,7 @@ import './RestaurantDetail.css'
 import FoodCard from "../../ui/FoodCard/FoodCard"
 
 
-const RestaurantDetail = ({setCartData}) => {
+const RestaurantDetail = ({cartData, setCartData}) => {
     const { id } = useParams()
     const [restaurantDetail, setRestaurantDetail] = useState({})
     const jwtToken = Cookies.get("jwtToken")    
@@ -98,7 +98,7 @@ const RestaurantDetail = ({setCartData}) => {
             <ul className="food-list">
                 {restaurantDetail.foodItems.map(food => (
                     <li key={food.id}>
-                        <FoodCard food={food} setCartData={setCartData} />
+                        <FoodCard food={food} setCartData={setCartData} cartData={cartData}/>
                     </li>
                 ))}
             </ul>

@@ -1,0 +1,102 @@
+.no-orders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 90vh;
+}
+
+.no-orders p{
+    color: #64748b;
+}
+
+.no-orders button{
+    background-color: #f7931e;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.link{
+    text-decoration: none;
+}
+.orders-details{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+}
+
+table{
+    width: 1100px;
+    border: 1px solid #0b69ff31;
+    background-color: #f9fbfe;
+}
+
+thead tr{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    font-weight: 600;
+    min-width: 1100px;
+}
+
+thead th {
+    border: none;
+    width: 33%;
+}
+
+hr{
+    margin-inline: 20px;
+    border: 1px dashed #333;
+}
+
+
+
+tfoot tr td{
+    border: none;    
+}
+
+tfoot tr{
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    margin: 20px;
+    margin-inline: 30px;
+}
+
+tfoot tr td h1{
+    font-size: 20px;    
+}
+
+.order{
+    min-width: 67%;
+    margin-left: 8%;
+}
+tfoot button{
+    background-color: #f7931e;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.price-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    width: 33%;
+    margin-left: 8%;
+}
+
+.total-price{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}

@@ -3,8 +3,7 @@ import { BiRupee } from 'react-icons/bi'
 import { AiFillStar } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 
-const FoodCard = ({ food, setCartData }) => {
-    const cartData = JSON.parse(localStorage.getItem("cartData"))
+const FoodCard = ({ food,cartData, setCartData }) => {
     const { imageUrl, name, cost, rating, id } = food
     const [add, setAdd] = useState(false)
     const [itemCount, setItemCount] = useState(0)
