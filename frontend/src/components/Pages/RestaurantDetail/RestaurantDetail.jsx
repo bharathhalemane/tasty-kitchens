@@ -7,12 +7,20 @@ import { AiFillStar } from "react-icons/ai";
 import { BiRupee } from "react-icons/bi";
 import './RestaurantDetail.css'
 import FoodCard from "../../ui/FoodCard/FoodCard"
+import Loader from "../../ui/Loader/Loader"
 
+const apiProgress = {
+    inProgress: "INPROGRESS",
+    success: "SUCCESS",
+    failed : "FAILED"
+}
 
 const RestaurantDetail = ({cartData, setCartData}) => {
     const { id } = useParams()
     const [restaurantDetail, setRestaurantDetail] = useState({})
+    const [restaurantDetailProgress, setRestaurantDetailProgress] = useState(apiProgress.inProgress)
     const jwtToken = Cookies.get("jwtToken")    
+
     const foodItemsFormat = food => ({
         cost: food.cost,
         foodType: food.food_type,
@@ -37,7 +45,8 @@ const RestaurantDetail = ({cartData, setCartData}) => {
         })
     
 
-    const getRestaurantDetail = async() => {
+    const getRestaurantDetail = async () => {
+        setRestaurantDetailProgress(apiProgress.inProgress)
         const url = `https://apis.ccbp.in/restaurants-list/${id}`
         const option = {
             method: "GET",
@@ -48,6 +57,7 @@ const RestaurantDetail = ({cartData, setCartData}) => {
         const response = await fetch(url, option)
         const data = await response.json()
         if (response.ok) {
+            setRestaurantDetailProgress(apiProgress.success)
             const restaurantFormattedData = restaurantDetailFormat(data) 
             setRestaurantDetail(restaurantFormattedData)
         }else{
@@ -105,11 +115,26 @@ const RestaurantDetail = ({cartData, setCartData}) => {
         );
     };
 
+    const renderRestaurantDetails = () => {
+        switch (restaurantDetailProgress) {
+            case apiProgress.inProgress:
+                return <div className="restaurant-detail-loader">
+                    <Loader />
+                </div>
+            case apiProgress.success:
+                return <>
+                    {Banner()}
+                    {FoodItemsList({restaurantDetail})}
+                </>
+            default:
+                return null
+        }
+    }
+
     return (
         <div className="restaurant-detail-page">
             <Header />
-            {Banner()}
-            {FoodItemsList({restaurantDetail})}
+            {renderRestaurantDetails()}
             <Footer/>
         </div>
         

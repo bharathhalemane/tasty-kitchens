@@ -8,7 +8,7 @@ import { BiRupee } from 'react-icons/bi'
 
 
 const Cart = ({setCartData, cartData}) => {    
-    const prices = cartData.map(each => each.cost)
+    const prices = cartData.map(each => each.cost * each.quantity)
     const totalPrice = prices.reduce((acc, cur) => {
         return acc + cur
     }, 0)

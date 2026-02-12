@@ -75,3 +75,10 @@ ul{
     list-style: none;
     padding: 0;
 }
+
+.restaurant-detail-loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}

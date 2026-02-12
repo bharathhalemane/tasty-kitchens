@@ -1,22 +1,23 @@
 import './Header.css'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Navigate } from 'react-router-dom'
+import { Link, replace } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Cookies from "js-cookie"
 import { MdOutlineMenu } from "react-icons/md";
 
 const Header = (props) => {
-    const {activateId} = props
+    const { activateId } = props
     const [mobileMenuBar, setMobileMenuBar] = useState(false)
+    const navigate = useNavigate()
 
     const links = [
         { name: "Home", path: "/", id: "home" },
-        {name: "Cart", path: "/cart", id: "cart"}
+        { name: "Cart", path: "/cart", id: "cart" }
     ]
 
     const logout = () => {
         Cookies.remove("jwtToken")
-        return <Navigate to="/login" replace/>
+            navigate("/login", { replace: true })
     }
 
     const onClickMenu = () => {
@@ -35,7 +36,7 @@ const Header = (props) => {
                         {
                             links.map(each => (
                                 <li key={each.id}>
-                                    <Link to={each.path} className={activateId===each.id ? "activate-link" : "link"}>{ each.name}</Link>
+                                    <Link to={each.path} className={activateId === each.id ? "activate-link" : "link"}>{each.name}</Link>
                                 </li>
                             ))
                         }
@@ -43,7 +44,7 @@ const Header = (props) => {
                     <button className="logout-button" onClick={logout}>Logout</button>
                 </div>
                 <div className='mobile-menu-link'>
-                    <MdOutlineMenu onClick={onClickMenu} size={30}/>
+                    <MdOutlineMenu onClick={onClickMenu} size={30} />
                 </div>
             </div>
             <div className={`mobile-menu ${mobileMenuBar ? "" : "d-none"}`}>
@@ -51,7 +52,7 @@ const Header = (props) => {
                     {
                         links.map(each => (
                             <li key={each.id}>
-                                <Link to={each.path} className={activateId===each.id ? "activate-link" : "link"}>{ each.name}</Link>
+                                <Link to={each.path} className={activateId === each.id ? "activate-link" : "link"}>{each.name}</Link>
                             </li>
                         ))
                     }

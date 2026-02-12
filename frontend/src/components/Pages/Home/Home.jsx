@@ -11,6 +11,7 @@ import { BiSearch } from "react-icons/bi";
 import Dropdown from "../../ui/DropDown/DropDown"
 import RestaurantCards from "../../ui/RestaurantCards/RestaurantCards"
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import Loader from "../../ui/Loader/Loader"
 
 const sortByOptions = [
     {
@@ -23,15 +24,25 @@ const sortByOptions = [
     }
 ]
 
+const apiProgress = {
+    inProgress: "INPROGRESS",
+    success: "SUCCESS",
+    failed : "FAILED"
+}
+
 const Home = () => {
     const [offersList, setOffersList] = useState([])
     const [popularRestaurant, setPopularRestaurant] = useState([])
     const [sortByFilter, setSortByFilter] = useState(sortByOptions[0].id)
     const [activePage, setActivePage] = useState(1)   
+    const [bannerProgress, setBannerProgress] = useState(apiProgress.inProgress)
+    const [restaurantProgress, setRestaurantProgress] = useState(apiProgress.inProgress)
 
     const jwtToken = Cookies.get("jwtToken")
 
+
     const getOffersList = async () => {
+        setBannerProgress(apiProgress.inProgress)
         const url = 'https://apis.ccbp.in/restaurants-list/offers'
         const option = {
             method: "GET",
@@ -44,6 +55,7 @@ const Home = () => {
         if (response.ok) {
             const formattedData = data.offers.map(offer => ({ id: offer.id, imageUrl: offer.image_url }))
             setOffersList(formattedData)
+            setBannerProgress(apiProgress.success)
         } else {
             console.log(data.error_msg)
         }
@@ -71,6 +83,7 @@ const Home = () => {
     })
 
     const getPopularRestaurantDetails = async () => {
+        setRestaurantProgress(apiProgress.inProgress)
         const limit = 9
         const offset = (activePage - 1) * limit
         console.log(offset)
@@ -84,6 +97,7 @@ const Home = () => {
         const response = await fetch(url, option)
         const data = await response.json()
         if (response.ok) {
+            setRestaurantProgress(apiProgress.success)
             const formattedData = data.restaurants.map(restaurant => formattedRestaurantData(restaurant))
             setPopularRestaurant(formattedData)
             console.log(formattedData)
@@ -161,12 +175,37 @@ const Home = () => {
         </div>
     )
 
+    const renderBannerSection = () => {
+        switch (bannerProgress) {
+            case apiProgress.inProgress:
+                return <div className="carousel-loader">
+                    <Loader />
+                </div>
+            case apiProgress.success:
+                return OffersCarousel()
+            default:
+                return null
+        }
+    }
+
+    const renderRestaurantDetails = () => {
+        switch (restaurantProgress) {
+            case apiProgress.inProgress:
+                return <div className="restaurant-details-loader">
+                    <Loader />
+                </div>
+            case apiProgress.success:
+                return RestaurantDetails()
+            default: 
+                return null
+        }
+    }
     return (
         <div className="home-page">
             <Header activateId="home" />
             <div className="home-restaurant-details-container">
-                {OffersCarousel()}
-                {RestaurantDetails()}
+                {renderBannerSection()}
+                {renderRestaurantDetails()}
                 <div className="restaurant-render-button">
                     <button onClick={() => setActivePage(prevStat => prevStat-1)}><MdOutlineKeyboardArrowLeft/></button>
                     <p>{activePage} of 20</p>
