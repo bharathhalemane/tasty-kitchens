@@ -62,12 +62,12 @@ const Login = () => {
                     <div className="input">
                         <label htmlFor="username">USERNAME</label>
                         <br />
-                        <input value={username} onChange={onChangeUsername} id="username" type="text" />
+                        <input value={username} onChange={onChangeUsername} id="username" type="text" placeholder="use rahul"/>
                     </div>
                     <div className='input'>
                         <label htmlFor="password">PASSWORD</label>
                         <br />
-                        <input value={password} onChange={onChangePassword} type="password" id="password" />
+                        <input value={password} onChange={onChangePassword} type="password" id="password" placeholder="user rahul@2021"/>
                     </div>
                     {errorMessage && <p className='error-message'>{ errorMessage}</p>}
                     <button className="login-button" type="submit">Login</button>
