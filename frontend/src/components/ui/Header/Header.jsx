@@ -1,6 +1,6 @@
 import './Header.css'
 import { useState } from 'react'
-import { Link, replace } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Cookies from "js-cookie"
 import { MdOutlineMenu } from "react-icons/md";
